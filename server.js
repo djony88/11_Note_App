@@ -1,6 +1,7 @@
 // Setup dependencies
 
 const express = requre("express");
+const { json } = require("express");
 const fs = require("fs");
 const path = require("path");
 const database = require("./db/db");
@@ -47,5 +48,13 @@ app.route("/api/notes")
     note.id = highID + 1;
     database.push(note)
 
-    
-})
+    fs.writeFile(jsonPath, JSON.stringify(database), function (err) {
+
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Note saved!");
+    });
+    res.json(note);
+});
+
