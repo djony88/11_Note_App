@@ -1,11 +1,11 @@
-// Set up dependencies
+// Setup dependencies
 
 const express = requre("express");
 const fs = require("fs");
 const path = require("path");
 const database = require("./db/db");
 
-// Set up Express app
+// Setup Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -24,5 +24,28 @@ app.get("/notes", function (req, res){
     res.sendFile(path.join(__dirname, "notes.html"));
 })
 
-// Set up rout for GET nad POST functions
+// Setup rout for GET nad POST functions
 
+app.route("/api/notes")
+.get(function(req, res) {
+    res.json(database);
+})
+
+.post(function(req, res) {
+    let jsonPath = path.join(__dirname, "/db/db.json");
+    let note = req.body;
+    let highID = 100;
+
+    for(let i = 0; i < database.length; i++) {
+        let singleNote = database[i];
+
+        if (singleNote.id > highID) {
+            highID = singleNote.id;
+        }
+    }
+
+    note.id = highID + 1;
+    database.push(note)
+
+    
+})
