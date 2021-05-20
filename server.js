@@ -58,3 +58,10 @@ app.route("/api/notes")
     res.json(note);
 });
 
+// Delite note function
+
+// Server listening setup
+app.listen(PORT, () => {
+    console.log(`App listening on PORT ${PORT}`);
+});
+  
