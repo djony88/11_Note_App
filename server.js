@@ -9,75 +9,78 @@ const database = require("./db/db");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+app.use(express.static('/public'));
 
 app.use(express.urlencoded({
     extended: true }));
 
 app.use(express.json());
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "/index.html"));
-});
+require("./routes/apiRoutes")(app)
+require("./routes/htmlRoutes")(app)
 
-app.get("/notes", function (req, res){
-    res.sendFile(path.join(__dirname, "notes.html"));
-})
+// app.get("/", function (req, res) {
+//     res.sendFile(path.join(__dirname, "/index.html"));
+// });
 
-// Setup rout for GET nad POST functions
+// app.get("/notes", function (req, res){
+//     res.sendFile(path.join(__dirname, "/notes.html"));
+// })
 
-app.route("/api/notes")
-.get(function(req, res) {
-    res.json(database);
-})
+// // Setup rout for GET nad POST functions
 
-.post(function(req, res) {
-    let jsonPath = path.join(__dirname, "/db/db.json");
-    let note = req.body;
-    let highID = 100;
+// app.route("/api/notes")
+// .get(function(req, res) {
+//     res.json(database);
+// })
 
-    for(let i = 0; i < database.length; i++) {
-        let singleNote = database[i];
+// .post(function(req, res) {
+//     let jsonPath = path.join(__dirname, "/db/db.json");
+//     let note = req.body;
+//     let highID = 100;
 
-        if (singleNote.id > highID) {
-            highID = singleNote.id;
-        }
-    }
+//     for(let i = 0; i < database.length; i++) {
+//         let singleNote = database[i];
 
-    note.id = highID + 1;
-    database.push(note)
+//         if (singleNote.id > highID) {
+//             highID = singleNote.id;
+//         }
+//     }
 
-    fs.writeFile(jsonPath, JSON.stringify(database), function (err) {
+//     note.id = highID + 1;
+//     database.push(note)
 
-        if (err) {
-            return console.log(err);
-        }
-        console.log("Note saved!");
-    });
-    res.json(note);
-});
+//     fs.writeFile(jsonPath, JSON.stringify(database), function (err) {
+
+//         if (err) {
+//             return console.log(err);
+//         }
+//         console.log("Note saved!");
+//     });
+//     res.json(note);
+// });
 
 // Delite note function
 
-app.delete("/api/notes/:id", function (req, res) {
-    let jsonPath = path.join(__dirname, "/db/db.json");
+// app.delete("/api/notes/:id", function (req, res) {
+//     let jsonPath = path.join(__dirname, "/db/db.json");
 
-    for (let i = 0; i < database.length; i++) {
+//     for (let i = 0; i < database.length; i++) {
 
-        if (database[i].id == req.params.id) {
-            database.splice(i, 1);
-            break;
-        }
-    }
+//         if (database[i].id == req.params.id) {
+//             database.splice(i, 1);
+//             break;
+//         }
+//     }
 
-    fs.writeFileSync(jsonPath, JSON.stringify(database), function (err) {
+//     fs.writeFileSync(jsonPath, JSON.stringify(database), function (err) {
 
-        if (err) {
-            return console.log("Note delited!");
-        }
-    });
-    res.json(database);
-});
+//         if (err) {
+//             return console.log("Note delited!");
+//         }
+//     });
+//     res.json(database);
+// });
 
 // Server listening setup
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
