@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "title": "Test",
+    "text": "This is a test note",
+    "id": 1
+  },
+  {
+    "title": "Monday",
+    "text": "Start training",
+    "id": 2
+  },
+  {
+    "title": "Tuesday",
+    "text": "Play guitar and finish groceries shopping.",
+    "id": 3
+  }
+]
