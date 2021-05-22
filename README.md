@@ -34,8 +34,8 @@ htmlRoutes.js:
 
 * Setup route for GET functions.
 
-![Screenshot 1](./11_Note_App/Assets/img/Notes_App.png)
+![Screenshot 1](./Assets/img/Notes_App.png)
 
-![Screenshot 2](./11_Note_App/Assets/img/Notes_App_2.png)
+![Screenshot 2](./Assets/img/Notes_App_2.png)
 
-![Screenshot 3](./11_Note_App/Assets/img/Notes_App_1.png)
+![Screenshot 3](./Assets/img/Notes_App_1.png)
