@@ -9,7 +9,9 @@ const database = require("./db/db");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('/public'));
+// app.use(express.static('Assets'));
+
+app.use('/Assets', express.static(path.join(__dirname, 'Assets')));
 
 app.use(express.urlencoded({
     extended: true }));
