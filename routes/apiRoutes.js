@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const jsonData = require("../db/db.json");
 
+// Setup route for GET and POST functions
+
 module.exports = function(app) {
     app.get("/api/notes", function (req, res) {
         res.sendFile(path.join(__dirname, "../db/db.json"));
